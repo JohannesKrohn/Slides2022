@@ -21,6 +21,7 @@ const eslint = require('gulp-eslint')
 const minify = require('gulp-clean-css')
 const connect = require('gulp-connect')
 const autoprefixer = require('gulp-autoprefixer')
+const pug = require('gulp-pug');
 
 const root = yargs.argv.root || '.'
 const port = yargs.argv.port || 8000
@@ -157,6 +158,24 @@ gulp.task('plugins', () => {
     } ));
 })
 
+//Compile pug
+
+gulp.task('views', () => {
+    return gulp.src('./src/pug/*.pug')
+        .pipe(pug({
+            doctype: 'html',
+            pretty: true
+        }))
+        .pipe(gulp.dest('./'))
+})
+gulp.task('copyFonts', () => {
+    return gulp.src('./src/fonts/**/*.*')
+        .pipe(gulp.dest('./dist/theme/fonts/'));
+})
+
+
+
+
 // a custom pipeable step to transform Sass to CSS
 function compileSass() {
   return through.obj( ( vinylFile, encoding, callback ) => {
@@ -267,7 +286,7 @@ gulp.task('test', gulp.series( 'eslint', 'qunit' ))
 
 gulp.task('default', gulp.series(gulp.parallel('js', 'css', 'plugins'), 'test'))
 
-gulp.task('build', gulp.parallel('js', 'css', 'plugins'))
+gulp.task('build', gulp.parallel('views','copyFonts', 'js', 'css', 'plugins'))
 
 gulp.task('package', gulp.series(() =>
 
@@ -289,6 +308,10 @@ gulp.task('package', gulp.series(() =>
 gulp.task('reload', () => gulp.src(['*.html', '*.md'])
     .pipe(connect.reload()));
 
+
+
+
+
 gulp.task('serve', () => {
 
     connect.server({
@@ -304,9 +327,12 @@ gulp.task('serve', () => {
 
     gulp.watch(['plugin/**/plugin.js', 'plugin/**/*.html'], gulp.series('plugins', 'reload'))
 
+    gulp.watch(['./src/pug/**/*.pug'], gulp.series('views'))
+
     gulp.watch([
         'css/theme/source/*.{sass,scss}',
         'css/theme/template/*.{sass,scss}',
+        'css/eon-ui/*.{sass,scss}',
     ], gulp.series('css-themes', 'reload'))
 
     gulp.watch([
@@ -317,3 +343,5 @@ gulp.task('serve', () => {
     gulp.watch(['test/*.html'], gulp.series('test'))
 
 })
+
+

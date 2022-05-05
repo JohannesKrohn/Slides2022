@@ -1,0 +1,17 @@
+mixin head(title="E.ON Design System")
+    doctype html
+    html
+        head(profile="http://www.w3.org/2005/10/profile")
+            title #{title}
+            link(rel="icon" type="image/png" href="img/favicon-32x32.png")
+            meta(charset="utf-8")
+            meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+            script(src="plugin/jquery-3.5.1.min.js")
+            link(rel="stylesheet" href="dist/reset.css")
+            link(rel="stylesheet" href="dist/reveal.css")
+            link(rel="stylesheet" href="dist/theme/black.css" id="theme")
+            link(rel="stylesheet" href="dist/theme/eon-ui.css" id="eon-ui")
+            // Theme used for syntax highlighted code
+            link(rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme")
+        body
+            block
