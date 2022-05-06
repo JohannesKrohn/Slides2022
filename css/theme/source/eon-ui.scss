@@ -447,7 +447,7 @@ p.emoji {
 }
 
 ul.agenda {
-  font-size: .6em;
+  font-size: .8em;
   list-style: none;
   width: 100%;
   padding: 0;
@@ -455,7 +455,7 @@ ul.agenda {
   grid-row-gap: 32px;
   margin: 64px 0;
   &.big {
-    font-size: .75em;
+    font-size: 1em;
   }
 
   li {
@@ -473,9 +473,13 @@ ul.agenda {
       }
       &.time-start {
         text-align: right;
+        width: 72px;
       }
       &.time-dash {
         text-align: center;
+      }
+      &.time-end {
+        width: 72px;
       }
 
       &.topic {

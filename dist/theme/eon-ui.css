@@ -797,7 +797,7 @@ p.emoji {
 }
 
 ul.agenda {
-  font-size: 0.6em;
+  font-size: 0.8em;
   list-style: none;
   width: 100%;
   padding: 0;
@@ -806,7 +806,7 @@ ul.agenda {
   margin: 64px 0;
 }
 ul.agenda.big {
-  font-size: 0.75em;
+  font-size: 1em;
 }
 ul.agenda li {
   display: grid;
@@ -823,9 +823,13 @@ ul.agenda li span.time {
 }
 ul.agenda li span.time-start {
   text-align: right;
+  width: 72px;
 }
 ul.agenda li span.time-dash {
   text-align: center;
+}
+ul.agenda li span.time-end {
+  width: 72px;
 }
 ul.agenda li span.topic {
   text-align: left;
